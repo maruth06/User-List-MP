@@ -17,16 +17,6 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var noteImageView: UIImageView!
     @IBOutlet weak var userDescriptionLabel: UILabel!
     
-    func configure(_ isLoading: Bool) {
-        if isLoading {
-            activityIndicator.startAnimating()
-            self.bringSubviewToFront(activityIndicatorView)
-        } else {
-            activityIndicator.stopAnimating()
-            self.sendSubviewToBack(activityIndicatorView)
-        }
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         

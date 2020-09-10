@@ -152,7 +152,7 @@ extension UserListViewController : UITableViewDataSource {
         let cell : UserTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         let model = viewModel.getUser(row: indexPath.row)
         
-        cell.configure(isNotesIconHidded(model.userId))
+        cell.noteImageView.isHidden = isNotesIconHidden(model.userId)
         cell.userNameLabel.text = model.login
         cell.userDescriptionLabel.text = model.type + "\(indexPath.row)"
         cell.userProfileImageView.downloadImage(model.avatarUrl, UIImage(named: "icon-user")) {
@@ -164,8 +164,8 @@ extension UserListViewController : UITableViewDataSource {
         return cell
     }
     
-    private func isNotesIconHidded(_ id: Int) -> Bool {
-        return UserOfflineManager.retrieveNotes(id) != nil
+    private func isNotesIconHidden(_ id: Int) -> Bool {
+        return UserOfflineManager.retrieveNotes(id) == nil
     }
 }
 

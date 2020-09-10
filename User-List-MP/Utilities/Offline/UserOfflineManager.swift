@@ -51,7 +51,7 @@ class UserOfflineManager {
         let id64 = Int64(id)
         let managedContext = CoreDataManager.shared.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NotesEntity>(entityName: "NotesEntity")
-        fetchRequest.predicate = NSPredicate(format: "id = %@", id64)
+        fetchRequest.predicate = NSPredicate(format: "id = %@", NSNumber(value: id))
         do {
             let notes = try managedContext.fetch(fetchRequest)
             return notes.first?.message
