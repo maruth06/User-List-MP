@@ -25,7 +25,7 @@ class UserOfflineManager {
     
     static func retrieveUserDetails(_ userName: String) -> UserModel? {
         let fetchRequest = NSFetchRequest<UserModel>(entityName: "UserModel")
-        fetchRequest.predicate = NSPredicate(format: "fullName = %@", userName)
+        fetchRequest.predicate = NSPredicate(format: "login = %@", userName)
         do {
            let users = try CoreDataManager.shared.persistentContainer.viewContext.fetch(fetchRequest)
             return users.first

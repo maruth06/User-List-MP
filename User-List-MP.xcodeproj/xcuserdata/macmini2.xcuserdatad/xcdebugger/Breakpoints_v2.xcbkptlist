@@ -7,192 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8120EA77-5997-45D5-888B-D235FEB77B20"
+            uuid = "9387A7EC-C426-4438-A2E2-8E896389F204"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "User-List-MP/User Page/UserPageViewModel.swift"
+            filePath = "User-List-MP/User List/UserListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "requestUserDetails(completion:)"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "requestUsers(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6CC693DE-7F90-4DB4-A9B6-EE3A2A78367D"
+            uuid = "1F2AE57F-6EE8-47EE-A409-25223B51931B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "User-List-MP/User Page/UserPageViewModel.swift"
+            filePath = "User-List-MP/User List/UserListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "requestUserDetails(completion:)"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "requestUsers(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AF079FA1-F0BD-4897-A0F9-FA74BDF20A5C"
+            uuid = "95940608-6C53-4E5D-9F62-3A7A6655911E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "User-List-MP/User List/UserListViewController.swift"
+            filePath = "User-List-MP/User List/UserListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "populateListData(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "AF079FA1-F0BD-4897-A0F9-FA74BDF20A5C - bb3b239e89f6ebc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "User_List_MP.UserListViewController.(populateListData in _76AB2022F2976FC0BBC7B68FC420C3B5)(Swift.Bool) -&gt; ()"
-                  moduleName = "User-List-MP"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macmini2/PersonalProjects/User-List-MP/User-List-MP/User%20List/UserListViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "126"
-                  endingLineNumber = "126"
-                  offsetFromSymbolStart = "45">
-               </Location>
-               <Location
-                  uuid = "AF079FA1-F0BD-4897-A0F9-FA74BDF20A5C - 9c65184c0a180566"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;User_List_MP.UserListModel&gt;, Swift.Error&gt;) -&gt; () in User_List_MP.UserListViewController.(populateListData in _76AB2022F2976FC0BBC7B68FC420C3B5)(Swift.Bool) -&gt; ()"
-                  moduleName = "User-List-MP"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macmini2/PersonalProjects/User-List-MP/User-List-MP/User%20List/UserListViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "126"
-                  endingLineNumber = "126"
-                  offsetFromSymbolStart = "241">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "73B0F477-ED71-49AE-A0B2-E10AFC824E3C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "User-List-MP/User List/UserListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "populateListData(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "73B0F477-ED71-49AE-A0B2-E10AFC824E3C - 9c65184c0a180566"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;User_List_MP.UserListModel&gt;, Swift.Error&gt;) -&gt; () in User_List_MP.UserListViewController.(populateListData in _76AB2022F2976FC0BBC7B68FC420C3B5)(Swift.Bool) -&gt; ()"
-                  moduleName = "User-List-MP"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macmini2/PersonalProjects/User-List-MP/User-List-MP/User%20List/UserListViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "130"
-                  endingLineNumber = "130"
-                  offsetFromSymbolStart = "486">
-               </Location>
-               <Location
-                  uuid = "73B0F477-ED71-49AE-A0B2-E10AFC824E3C - da22745cd773cb8d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 (Swift.Result&lt;Swift.Array&lt;User_List_MP.UserListModel&gt;, Swift.Error&gt;) -&gt; () in User_List_MP.UserListViewController.(populateListData in _76AB2022F2976FC0BBC7B68FC420C3B5)(Swift.Bool) -&gt; ()"
-                  moduleName = "User-List-MP"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macmini2/PersonalProjects/User-List-MP/User-List-MP/User%20List/UserListViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "130"
-                  endingLineNumber = "130"
-                  offsetFromSymbolStart = "127">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DA051C2D-3287-4569-8593-8A5261358862"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "User-List-MP/User List/UserListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "configureNetworkMonitor()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A1F78367-AC46-40C0-8FC1-21A3788BE0A8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "User-List-MP/User List/UserListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "configureNetworkMonitor()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7ACB059D-4F01-40BC-8BE1-45EF71250108"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "User-List-MP/User List/UserListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "configureNetworkMonitor()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E7AADC3F-CD40-45C7-9D11-4C881130394F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "User-List-MP/User List/UserListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "configureNetworkMonitor()"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "requestUsers(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

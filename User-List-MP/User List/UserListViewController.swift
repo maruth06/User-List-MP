@@ -33,7 +33,7 @@ class UserListViewController: UIViewController {
         initializeViews()
         configureViews()
         configureNetworkMonitor()
-        populateListData()
+//        populateListData()
     }
     
     // MARK: - UI Methods
@@ -123,7 +123,9 @@ class UserListViewController: UIViewController {
     
     // MARK: - Data
     private func populateListData(_ isLoadMore: Bool = false) {
+        Spinner.start(from: self.view)
         viewModel.requestUsers(isLoadMore) { [weak self] (result) in
+            Spinner.stop()
             guard let self = self else { return }
             switch result {
             case .success(let users):
@@ -138,7 +140,9 @@ class UserListViewController: UIViewController {
                     }
                 }
                 break
-            case .failure(_): break
+            case .failure(let error):
+                self.showAlertDialog("Error", error.localizedDescription)
+                break
             }
         }
     }

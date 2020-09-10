@@ -86,7 +86,9 @@ class UserPageViewController: UIViewController {
     
     // MARK: - Data
     private func populateData() {
+        Spinner.start(from: self.view)
         viewModel.requestUserDetails { (_) in
+            Spinner.stop()
             self.updateUI()
         }
     }

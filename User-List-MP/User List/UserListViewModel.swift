@@ -48,7 +48,8 @@ class UserListViewModel {
                     completion(.success(userList))
                     break
                 case .failure(let errorResponse):
-                    if let users = UserOfflineManager.retrieveUserDetails(self.pageSize, self.fetchOffset) {
+                    if let users = UserOfflineManager.retrieveUserDetails(self.pageSize, self.fetchOffset),
+                    users.count > 0{
                         if loadMore {
                             self.fetchOffset += users.count
                             self.userList.append(contentsOf: users)
