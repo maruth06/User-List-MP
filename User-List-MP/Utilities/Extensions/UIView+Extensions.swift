@@ -2,8 +2,8 @@
 //  UIView+Extensions.swift
 //  Users-Miho
 //
-//  Created by Mac Mini 2 on 9/9/20.
-//  Copyright © 2020 Miho Puno. All rights reserved.
+//  Created by Mac on 9/9/20.
+//  Copyright © 2020 Miho. All rights reserved.
 //
 
 import UIKit
@@ -51,5 +51,35 @@ extension UIView {
         
         /* Adding the gradient layer on to the view */
         self.layer.addSublayer(gradientLayer)
+    }
+    
+    private var container: UIView {
+        return UIView()
+    }
+    
+    func showLoading() {
+        container.frame = self.frame
+        container.center = self.center
+        container.backgroundColor = UIColor(rgb: 0xffffff, alpha: 0.3)
+
+        let loadingView: UIView = UIView()
+        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        loadingView.center = self.center
+        loadingView.backgroundColor = UIColor(rgb:0x444444, alpha: 0.7)
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+
+        let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
+        actInd.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        actInd.style = UIActivityIndicatorView.Style.large
+        actInd.center = CGPoint(x: loadingView.frame.size.width / 2, y: loadingView.frame.size.height / 2)
+        loadingView.addSubview(actInd)
+        container.addSubview(loadingView)
+        self.addSubview(container)
+        actInd.startAnimating()
+    }
+    
+    func dismissLoading() {
+        container.removeFromSuperview()
     }
 }

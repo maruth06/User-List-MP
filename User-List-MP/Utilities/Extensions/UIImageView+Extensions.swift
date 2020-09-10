@@ -2,8 +2,8 @@
 //  UIImageView+Extensions.swift
 //  Users-Miho
 //
-//  Created by Mac Mini 2 on 9/9/20.
-//  Copyright © 2020 Miho Puno. All rights reserved.
+//  Created by Mac on 9/9/20.
+//  Copyright © 2020 Miho. All rights reserved.
 //
 
 import UIKit

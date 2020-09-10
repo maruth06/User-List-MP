@@ -2,8 +2,8 @@
 //  UserPageViewModel.swift
 //  Users-Miho
 //
-//  Created by Mac Mini 2 on 9/9/20.
-//  Copyright © 2020 Miho Puno. All rights reserved.
+//  Created by Mac on 9/9/20.
+//  Copyright © 2020 Miho. All rights reserved.
 //
 
 import Foundation
@@ -58,16 +58,16 @@ class UserPageViewModel {
     func requestUserDetails(completion: @escaping Completion<UserModel>) {
         NetworkRequest.shared.request(type: Routes.UserPage.getUserDetails(
             self.userName, CoreDataManager.shared.persistentContainer.viewContext)) { (result) in
-            switch result {
-            case .success(let userModel):
-                self.userModel = userModel
-                CoreDataManager.shared.saveContext(nil)
-                completion(.success(userModel))
-                break
-            case .failure(let errorResponse):
-                completion(.failure(errorResponse))
-                break
-            }
+                switch result {
+                case .success(let userModel):
+                    self.userModel = userModel
+                    CoreDataManager.shared.saveContext(nil)
+                    completion(.success(userModel))
+                    break
+                case .failure(let errorResponse):
+                    completion(.failure(errorResponse))
+                    break
+                }
         }
     }
     
@@ -85,15 +85,18 @@ class UserPageViewModel {
     }
     
     func requestFollowingList( _ completion: @escaping Completion<[User]>) {
-           NetworkRequest.shared.request(type: Routes.UserPage.getFollowingList(userName)) { (result) in
-               switch result {
-               case .success(let userModel):
-                   completion(.success(userModel))
-                   break
-               case .failure(let errorResponse):
-                   completion(.failure(errorResponse))
-                   break
-               }
-           }
-       }
+        NetworkRequest.shared.request(type: Routes.UserPage.getFollowingList(userName)) { (result) in
+            switch result {
+            case .success(let userModel):
+                completion(.success(userModel))
+                break
+            case .failure(let errorResponse):
+                completion(.failure(errorResponse))
+                break
+            }
+        }
+    }
+    
+    // MARK: Offline Methods
+    
 }

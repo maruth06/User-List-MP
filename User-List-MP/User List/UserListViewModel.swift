@@ -2,8 +2,8 @@
 //  UserListViewModel.swift
 //  Users-Miho
 //
-//  Created by Mac Mini 2 on 9/8/20.
-//  Copyright © 2020 Miho Puno. All rights reserved.
+//  Created by Mac on 9/8/20.
+//  Copyright © 2020 Miho. All rights reserved.
 //
 
 import Foundation
@@ -33,9 +33,15 @@ class UserListViewModel {
                 self.isFetchingInProgress = false
                 switch result {
                 case .success(let userList):
-                    self.userList = userList
                     self.itemCountPerPage = userList.count
-                    self.pageNo = loadMore ? self.pageNo + 1 : 0
+                    if loadMore {
+                        self.userList.append(contentsOf: userList)
+                    } else {
+                        self.userList = userList
+                    }
+                    self.pageNo = loadMore
+                        ? (self.userList.last?.userId ?? self.pageNo + 1)
+                        : 0
                     completion(.success(userList))
                     break
                 case .failure(let errorResponse):

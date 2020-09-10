@@ -14,6 +14,9 @@
 		7A09043C250A1D4200DD01AA /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A09043B250A1D4200DD01AA /* LoadingView.xib */; };
 		7A09043E250A1D4F00DD01AA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A09043D250A1D4F00DD01AA /* LoadingView.swift */; };
 		7A090440250A3D6900DD01AA /* LoadMoreActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A09043F250A3D6900DD01AA /* LoadMoreActivityIndicator.swift */; };
+		7A4AF64A250A8AEC0043F7B8 /* NotesEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4AF648250A8AEC0043F7B8 /* NotesEntity+CoreDataClass.swift */; };
+		7A4AF64B250A8AEC0043F7B8 /* NotesEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4AF649250A8AEC0043F7B8 /* NotesEntity+CoreDataProperties.swift */; };
+		7A4AF64D250A8BCE0043F7B8 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4AF64C250A8BCE0043F7B8 /* UIColor+Extensions.swift */; };
 		7A820D532508605700D0CB7C /* UserListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A820D522508605700D0CB7C /* UserListViewController.xib */; };
 		7A820D552508636A00D0CB7C /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A820D542508636A00D0CB7C /* Routes.swift */; };
 		7A820D5725089E6C00D0CB7C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A820D5625089E6C00D0CB7C /* CoreDataManager.swift */; };
@@ -52,6 +55,9 @@
 		7A09043B250A1D4200DD01AA /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		7A09043D250A1D4F00DD01AA /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7A09043F250A3D6900DD01AA /* LoadMoreActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreActivityIndicator.swift; sourceTree = "<group>"; };
+		7A4AF648250A8AEC0043F7B8 /* NotesEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotesEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7A4AF649250A8AEC0043F7B8 /* NotesEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotesEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7A4AF64C250A8BCE0043F7B8 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		7A820D522508605700D0CB7C /* UserListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserListViewController.xib; sourceTree = "<group>"; };
 		7A820D542508636A00D0CB7C /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		7A820D5625089E6C00D0CB7C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -188,6 +194,7 @@
 				7ADDA0402507FC2800E92EA3 /* UITableView+Extensions.swift */,
 				7A9164CF250943BC009ED03E /* CodingUserInfoKey+Extensions.swift */,
 				7A090435250A179A00DD01AA /* UIViewController+Extension.swift */,
+				7A4AF64C250A8BCE0043F7B8 /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -198,6 +205,8 @@
 				7ADF73972507916E008A60A8 /* Users_Miho.xcdatamodeld */,
 				7A820D5625089E6C00D0CB7C /* CoreDataManager.swift */,
 				7ADF73B7250798E2008A60A8 /* UserOfflineManager.swift */,
+				7A4AF648250A8AEC0043F7B8 /* NotesEntity+CoreDataClass.swift */,
+				7A4AF649250A8AEC0043F7B8 /* NotesEntity+CoreDataProperties.swift */,
 			);
 			path = Offline;
 			sourceTree = "<group>";
@@ -287,6 +296,7 @@
 				7ADDA0382507F32800E92EA3 /* UserPageViewController.swift in Sources */,
 				7ADDA0412507FC2800E92EA3 /* UITableView+Extensions.swift in Sources */,
 				7A820D5725089E6C00D0CB7C /* CoreDataManager.swift in Sources */,
+				7A4AF64D250A8BCE0043F7B8 /* UIColor+Extensions.swift in Sources */,
 				7ADF73B325079778008A60A8 /* Dictionary+Extensions.swift in Sources */,
 				7ADF73992507916E008A60A8 /* Users_Miho.xcdatamodeld in Sources */,
 				7ADF73A8250791D9008A60A8 /* NetworkRequest.swift in Sources */,
@@ -295,11 +305,13 @@
 				7ADDA0352507EE1700E92EA3 /* UIImageView+Extensions.swift in Sources */,
 				7ADDA0312507E4E600E92EA3 /* UIView+Extensions.swift in Sources */,
 				7A090440250A3D6900DD01AA /* LoadMoreActivityIndicator.swift in Sources */,
+				7A4AF64B250A8AEC0043F7B8 /* NotesEntity+CoreDataProperties.swift in Sources */,
 				7A09043A250A1A8000DD01AA /* UserTableViewModel.swift in Sources */,
 				7ADDA02D2507E33F00E92EA3 /* UserModel.swift in Sources */,
 				7A9164D0250943BC009ED03E /* CodingUserInfoKey+Extensions.swift in Sources */,
 				7ADF73AF250793C3008A60A8 /* UserListModel.swift in Sources */,
 				7ADF73C225079D3E008A60A8 /* UserListCoordinator.swift in Sources */,
+				7A4AF64A250A8AEC0043F7B8 /* NotesEntity+CoreDataClass.swift in Sources */,
 				7ADDA03E2507F84E00E92EA3 /* UserTableViewCell.swift in Sources */,
 				7ADDA0432508024C00E92EA3 /* UserPageViewModel.swift in Sources */,
 				7A09043E250A1D4F00DD01AA /* LoadingView.swift in Sources */,

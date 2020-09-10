@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  Users-Miho
 //
-//  Created by Mac Mini 2 on 9/8/20.
-//  Copyright © 2020 Miho Puno. All rights reserved.
+//  Created by Mac on 9/8/20.
+//  Copyright © 2020 Miho. All rights reserved.
 //
 
 import UIKit
@@ -126,11 +126,15 @@ class UserListViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let users):
-                if isLoadMore {
-                    let indexPaths = self.viewModel.calculateIndexPathsToReload(from: users)
-                    self.userTableView.reloadRows(at: indexPaths, with: .none)
-                } else {
-                    self.userTableView.reloadData()
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.activityIndicator.stop()
+                    if isLoadMore {
+                        let indexPaths = self.viewModel.calculateIndexPathsToReload(from: users)
+                        self.userTableView.insertRows(at: indexPaths, with: .none)
+                    } else {
+                        self.userTableView.reloadData()
+                    }
                 }
                 break
             case .failure(_): break
@@ -148,9 +152,9 @@ extension UserListViewController : UITableViewDataSource {
         let cell : UserTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         let model = viewModel.getUser(row: indexPath.row)
         
-        cell.configure(false)
+        cell.configure(isNotesIconHidded(model.userId))
         cell.userNameLabel.text = model.login
-        cell.userDescriptionLabel.text = model.type
+        cell.userDescriptionLabel.text = model.type + "\(indexPath.row)"
         cell.userProfileImageView.downloadImage(model.avatarUrl, UIImage(named: "icon-user")) {
             let modulo = indexPath.row % 3
             guard (modulo == 0 && indexPath.row != 0) else { return }
@@ -158,6 +162,10 @@ extension UserListViewController : UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    private func isNotesIconHidded(_ id: Int) -> Bool {
+        return UserOfflineManager.retrieveNotes(id) != nil
     }
 }
 
@@ -170,25 +178,9 @@ extension UserListViewController : UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         activityIndicator.start {
             DispatchQueue.global(qos: .utility).async {
-                sleep(3)
-                DispatchQueue.main.async { [weak self] in
-                    self?.activityIndicator.stop()
-                }
+                self.populateListData(true)
             }
         }
     }
 }
-
-private extension UserListViewController {
-    func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        return indexPath.row >= viewModel.numberOfRows
-    }
-    
-    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
-        let indexPathsForVisibleRows = userTableView.indexPathsForVisibleRows ?? []
-        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
-        return Array(indexPathsIntersection)
-    }
-}
-
 

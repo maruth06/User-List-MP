@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="NotesEntity" representedClassName="NotesEntity" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="message" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="UserDetailsEntity" representedClassName="UserDetailsEntity" syncable="YES">
         <attribute name="avatarUrl" optional="YES" attributeType="String"/>
         <attribute name="bio" optional="YES" attributeType="String"/>
@@ -21,7 +25,6 @@
         <attribute name="location" optional="YES" attributeType="String"/>
         <attribute name="login" optional="YES" attributeType="String"/>
         <attribute name="nodeId" optional="YES" attributeType="String"/>
-        <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="organizationsUrl" optional="YES" attributeType="String"/>
         <attribute name="publicGists" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="publicRepos" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -43,6 +46,7 @@
         <attribute name="gistsUrl" optional="YES" attributeType="String"/>
         <attribute name="gravatarId" optional="YES" attributeType="String"/>
         <attribute name="htmlUrl" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="login" optional="YES" attributeType="String"/>
         <attribute name="nodeId" optional="YES" attributeType="String"/>
         <attribute name="organizationsUrl" optional="YES" attributeType="String"/>
@@ -55,7 +59,8 @@
         <attribute name="url" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="UserDetailsEntity" positionX="-54" positionY="-9" width="128" height="538"/>
-        <element name="UserListEntity" positionX="-63" positionY="-18" width="128" height="298"/>
+        <element name="UserDetailsEntity" positionX="-54" positionY="-9" width="128" height="523"/>
+        <element name="UserListEntity" positionX="-63" positionY="-18" width="128" height="313"/>
+        <element name="NotesEntity" positionX="-54" positionY="135" width="128" height="73"/>
     </elements>
 </model>

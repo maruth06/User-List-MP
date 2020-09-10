@@ -2,8 +2,8 @@
 //  UserListModel.swift
 //  Users-Miho
 //
-//  Created by Mac Mini 2 on 9/8/20.
-//  Copyright © 2020 Miho Puno. All rights reserved.
+//  Created by Mac on 9/8/20.
+//  Copyright © 2020 Miho. All rights reserved.
 //
 
 import Foundation
@@ -91,7 +91,7 @@ import CoreData
 class UserListModel : Codable {
     
     var login : String
-    var userId : Int16
+    var userId : Int
     var nodeId : String
     var avatarUrl : String
     var gravatarId : String
