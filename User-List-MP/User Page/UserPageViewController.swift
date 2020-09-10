@@ -44,6 +44,7 @@ class UserPageViewController: UIViewController {
         configureNetworkMonitor()
         populateData()
         setupNotificationObservers()
+        updateUI()
     }
     
     private func configureNetworkMonitor() {
@@ -86,10 +87,8 @@ class UserPageViewController: UIViewController {
     
     // MARK: - Data
     private func populateData() {
-        Spinner.start(from: self.view)
         viewModel.requestUserDetails { (_) in
             Spinner.stop()
-            self.updateUI()
         }
     }
     

@@ -56,6 +56,10 @@ class UserPageViewModel {
     
     init() {
         self.userName = ""
+        if let userModel = UserOfflineManager.retrieveUserDetails(self.userName) {
+            self.userModel = userModel
+            self.userName = userModel.login
+        }
     }
     
     func setUserName(_ userName: String) {

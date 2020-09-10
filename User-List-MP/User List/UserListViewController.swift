@@ -76,6 +76,7 @@ class UserListViewController: UIViewController {
         userTableView.allowsMultipleSelection = false
         userTableView.allowsSelection = true
         userTableView.register(nib: UserTableViewCell.self)
+        userTableView.reloadData()
         let tableViewConstraints = [userTableView.topAnchor.constraint(equalTo: self.stackView.topAnchor, constant: 8),
                                     userTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
                                     userTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 8),

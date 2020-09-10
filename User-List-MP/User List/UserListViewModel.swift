@@ -26,6 +26,13 @@ class UserListViewModel {
         userList = []
         pageSize = 30
         fetchOffset = 0
+        if let users = UserOfflineManager.retrieveUserDetails(self.pageSize, self.fetchOffset),
+            users.count > 0 {
+            self.fetchOffset += users.count
+            self.userList.append(contentsOf: users)
+            let intId = Int(self.userList.last?.id ?? 0)
+            self.pageNo = intId
+        }
     }
     
     func requestUsers(_ loadMore: Bool=true, completion: @escaping Completion<[UserListModel]>) {
@@ -49,7 +56,7 @@ class UserListViewModel {
                     break
                 case .failure(let errorResponse):
                     if let users = UserOfflineManager.retrieveUserDetails(self.pageSize, self.fetchOffset),
-                    users.count > 0{
+                    users.count > 0 {
                         if loadMore {
                             self.fetchOffset += users.count
                             self.userList.append(contentsOf: users)
