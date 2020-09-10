@@ -64,7 +64,7 @@ class UserPageViewController: UIViewController {
         }
         monitor.start(queue: queue)
     }
-
+    
     private func updateUINetworkIndicator(_ isHidden: Bool) {
         DispatchQueue.main.async {
             self.networkIndicatorView.isHidden = isHidden

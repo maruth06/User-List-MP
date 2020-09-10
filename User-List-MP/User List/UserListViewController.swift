@@ -55,6 +55,7 @@ class UserListViewController: UIViewController {
         messageLabel.numberOfLines = 0
         messageLabel.lineBreakMode = .byWordWrapping
         messageLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        networkIndicatorView.addSubview(messageLabel)
         let labelConstraints = [messageLabel.topAnchor.constraint(equalTo: self.networkIndicatorView.topAnchor, constant: 4),
                                 messageLabel.leadingAnchor.constraint(equalTo: self.networkIndicatorView.leadingAnchor, constant: 0),
                                 messageLabel.trailingAnchor.constraint(equalTo: self.networkIndicatorView.trailingAnchor, constant: 0),
@@ -67,8 +68,6 @@ class UserListViewController: UIViewController {
         let viewConstraints = [stackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0),
                                stackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
                                stackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0)]
-        
-        networkIndicatorView.addSubview(messageLabel)
         stackView.addArrangedSubview(networkIndicatorView)
         self.view.addSubview(stackView)
         
@@ -108,6 +107,10 @@ class UserListViewController: UIViewController {
                 print("Internet connection is on.")
                 self.updateUINetworkIndicator(true)
                 self.populateListData()
+                break
+            case .requiresConnection:
+                break
+            case .unsatisfied:
                 break
             default:
                 print("There's no internet connection.")

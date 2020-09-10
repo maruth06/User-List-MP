@@ -72,7 +72,12 @@ class UserPageViewModel {
                     completion(.success(userModel))
                     break
                 case .failure(let errorResponse):
-                    completion(.failure(errorResponse))
+                    if let userModel = UserOfflineManager.retrieveUserDetails(self.userName) {
+                        self.userModel = userModel
+                        completion(.success(userModel))
+                    } else {
+                        completion(.failure(errorResponse))
+                    }
                     break
                 }
         }

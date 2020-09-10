@@ -12,18 +12,20 @@ import CoreData
 class UserListViewModel {
     
     var pageNo : Int
-    var itemCountPerPage : Int
+    var pageSize : Int
     var numberOfRows : Int {
         return userList.count
     }
     
     private var userList : [UserListModel]
     private var isFetchingInProgress : Bool = false
+    private var fetchOffset : Int
     
     init() {
         pageNo = 0
         userList = []
-        itemCountPerPage = 30
+        pageSize = 30
+        fetchOffset = 0
     }
     
     func requestUsers(_ loadMore: Bool=true, completion: @escaping Completion<[UserListModel]>) {
@@ -34,7 +36,7 @@ class UserListViewModel {
                 self.isFetchingInProgress = false
                 switch result {
                 case .success(let userList):
-                    self.itemCountPerPage = userList.count
+                    self.pageSize = userList.count
                     if loadMore {
                         self.userList.append(contentsOf: userList)
                     } else {
@@ -42,10 +44,23 @@ class UserListViewModel {
                     }
                     let intId = Int(self.userList.last?.id ?? 0)
                     self.pageNo = loadMore ? intId : 0
+                    CoreDataManager.shared.saveContext(nil)
                     completion(.success(userList))
                     break
                 case .failure(let errorResponse):
-                    completion(.failure(errorResponse))
+                    if let users = UserOfflineManager.retrieveUserDetails(self.pageSize, self.fetchOffset) {
+                        if loadMore {
+                            self.fetchOffset += users.count
+                            self.userList.append(contentsOf: users)
+                        } else {
+                            self.fetchOffset = 0
+                            self.userList = users
+                        }
+                        let intId = Int(self.userList.last?.id ?? 0)
+                        self.pageNo = loadMore ? intId : 0
+                    } else {
+                        completion(.failure(errorResponse))
+                    }
                     break
                 }
         }

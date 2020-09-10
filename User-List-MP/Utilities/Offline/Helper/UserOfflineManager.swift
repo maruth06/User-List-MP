@@ -11,18 +11,27 @@ import CoreData
 
 class UserOfflineManager {
     
+    static func retrieveUserDetails(_ pageSize: Int, _ offset: Int) -> [UserListModel]? {
+        let fetchRequest = NSFetchRequest<UserListModel>(entityName: "UserListModel")
+        fetchRequest.fetchBatchSize = pageSize
+        fetchRequest.fetchOffset = offset
+        do {
+           let users = try CoreDataManager.shared.persistentContainer.viewContext.fetch(fetchRequest)
+            return users
+        } catch _ as NSError {
+            return nil
+        }
+    }
     
-    static func fetchUserDetails() {
-        //        let fetchRequest = NSFetchRequest<UserModel>(entityName: "UserDetailsEntity")
-        //        let sort = NSSortDescriptor(key: "gitcommit.committer.date", ascending: false)
-        //        fetchRequest.sortDescriptors = [sort]
-        //        do {
-        //            // fetch is performed on the NSManagedObjectContext
-        //            let data = try CoreDataManager.shared.persistentContainer.viewContext.fetch(fetchRequest)
-        //            print("Got \(data.count) commits")
-        //        } catch {
-        //            print("Fetch failed")
-        //        }
+    static func retrieveUserDetails(_ userName: String) -> UserModel? {
+        let fetchRequest = NSFetchRequest<UserModel>(entityName: "UserModel")
+        fetchRequest.predicate = NSPredicate(format: "fullName = %@", userName)
+        do {
+           let users = try CoreDataManager.shared.persistentContainer.viewContext.fetch(fetchRequest)
+            return users.first
+        } catch _ as NSError {
+            return nil
+        }
     }
     
     static func saveNotes(_ id: Int64, _ message: String, completion: ((_ error: NSError?)->Void)?) {
