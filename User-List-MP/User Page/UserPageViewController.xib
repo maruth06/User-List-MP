@@ -56,7 +56,7 @@
                     <rect key="frame" x="0.0" y="94" width="414" height="691"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j5E-4F-fm0">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="605"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="625"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kbm-hi-QwR" userLabel="User Profile Picture">
                                     <rect key="frame" x="8" y="8" width="398" height="245.5"/>
@@ -143,11 +143,11 @@
                                         <constraint firstAttribute="height" constant="0.5" id="OrS-y7-c6U"/>
                                     </constraints>
                                 </view>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Sample" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="39x-CO-HSX">
-                                    <rect key="frame" x="8" y="497" width="398" height="100"/>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="39x-CO-HSX">
+                                    <rect key="frame" x="8" y="497" width="398" height="120"/>
                                     <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="100" id="swu-d4-mxd"/>
+                                        <constraint firstAttribute="height" constant="120" id="swu-d4-mxd"/>
                                     </constraints>
                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>

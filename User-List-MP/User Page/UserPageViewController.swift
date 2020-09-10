@@ -36,7 +36,6 @@ class UserPageViewController: UIViewController {
         self.coordinatorDelegate = coordinatorDelegate
         self.viewModel.setUserName(userName)
         self.navigationItem.title = userName
-        
     }
     
     override func viewDidLoad() {
@@ -65,7 +64,7 @@ class UserPageViewController: UIViewController {
         }
         monitor.start(queue: queue)
     }
-    
+
     private func updateUINetworkIndicator(_ isHidden: Bool) {
         DispatchQueue.main.async {
             self.networkIndicatorView.isHidden = isHidden
@@ -73,6 +72,7 @@ class UserPageViewController: UIViewController {
     }
     
     private func updateUI() {
+        notesTextView.text = viewModel.userNotes
         userNameLabel.text = viewModel.userFullName
         userImageView.downloadImage(viewModel.imageUrl, UIImage(named: "icon-user"), nil)
         companyLabel.text = viewModel.company
@@ -153,6 +153,11 @@ class UserPageViewController: UIViewController {
     }
     
     @IBAction func onTappedSaveButton(_ sender: Any) {
-        
+        guard let userId = viewModel.userId else { return }
+        UserOfflineManager.saveNotes(userId, notesTextView.text) { (error) in
+            if let error = error {
+                self.showAlertDialog("Error", error.localizedDescription, buttonTitle: "OK")
+            }
+        }
     }
 }

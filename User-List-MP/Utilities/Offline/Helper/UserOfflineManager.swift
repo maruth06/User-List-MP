@@ -25,12 +25,12 @@ class UserOfflineManager {
         //        }
     }
     
-    static func saveNotes(_ id: Int, _ message: String, completion: ((_ error: NSError?)->Void)?) {
+    static func saveNotes(_ id: Int64, _ message: String, completion: ((_ error: NSError?)->Void)?) {
         guard let entity = NSEntityDescription.entity(
-            forEntityName: "NotesEntity",
+            forEntityName: "Notes",
             in: CoreDataManager.shared.persistentContainer.viewContext) else { return }
-        let fetchRequest = NSFetchRequest<NotesEntity>(entityName: "NotesEntity")
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        let fetchRequest = NSFetchRequest<Notes>(entityName: "Notes")
+        fetchRequest.predicate = NSPredicate(format: "id = %@", NSNumber(value: id))
         do {
             let notes = try CoreDataManager.shared.persistentContainer.viewContext.fetch(fetchRequest)
             if let note = notes.first {
@@ -47,10 +47,9 @@ class UserOfflineManager {
         }
     }
     
-    static func retrieveNotes(_ id: Int) -> String? {
-        let id64 = Int64(id)
+    static func retrieveNotes(_ id: Int64) -> String? {
         let managedContext = CoreDataManager.shared.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NotesEntity>(entityName: "NotesEntity")
+        let fetchRequest = NSFetchRequest<Notes>(entityName: "Notes")
         fetchRequest.predicate = NSPredicate(format: "id = %@", NSNumber(value: id))
         do {
             let notes = try managedContext.fetch(fetchRequest)

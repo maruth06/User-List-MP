@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class UserListViewModel {
     
@@ -39,9 +40,8 @@ class UserListViewModel {
                     } else {
                         self.userList = userList
                     }
-                    self.pageNo = loadMore
-                        ? (self.userList.last?.userId ?? self.pageNo + 1)
-                        : 0
+                    let intId = Int(self.userList.last?.id ?? 0)
+                    self.pageNo = loadMore ? intId : 0
                     completion(.success(userList))
                     break
                 case .failure(let errorResponse):

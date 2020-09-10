@@ -101,6 +101,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A4AF64E250A9ACC0043F7B8 /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				7A090437250A1A2A00DD01AA /* UserTableViewController.swift */,
+				7A090439250A1A8000DD01AA /* UserTableViewModel.swift */,
+			);
+			path = Follow;
+			sourceTree = "<group>";
+		};
+		7A4AF64F250A9BDA0043F7B8 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				7ADF73B7250798E2008A60A8 /* UserOfflineManager.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		7ADF73822507916E008A60A8 = {
 			isa = PBXGroup;
 			children = (
@@ -153,8 +170,7 @@
 				7ADDA0362507F32800E92EA3 /* UserPageViewController.swift */,
 				7ADDA0372507F32800E92EA3 /* UserPageViewController.xib */,
 				7ADDA0422508024C00E92EA3 /* UserPageViewModel.swift */,
-				7A090437250A1A2A00DD01AA /* UserTableViewController.swift */,
-				7A090439250A1A8000DD01AA /* UserTableViewModel.swift */,
+				7A4AF64E250A9ACC0043F7B8 /* Follow */,
 			);
 			path = "User Page";
 			sourceTree = "<group>";
@@ -204,9 +220,9 @@
 			children = (
 				7ADF73972507916E008A60A8 /* Users_Miho.xcdatamodeld */,
 				7A820D5625089E6C00D0CB7C /* CoreDataManager.swift */,
-				7ADF73B7250798E2008A60A8 /* UserOfflineManager.swift */,
 				7A4AF648250A8AEC0043F7B8 /* NotesEntity+CoreDataClass.swift */,
 				7A4AF649250A8AEC0043F7B8 /* NotesEntity+CoreDataProperties.swift */,
+				7A4AF64F250A9BDA0043F7B8 /* Helper */,
 			);
 			path = Offline;
 			sourceTree = "<group>";

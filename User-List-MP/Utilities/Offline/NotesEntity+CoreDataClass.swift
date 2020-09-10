@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(NotesEntity)
-public class NotesEntity: NSManagedObject {
+@objc(Notes)
+public class Notes: NSManagedObject {
 
 }

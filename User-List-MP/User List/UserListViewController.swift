@@ -74,10 +74,8 @@ class UserListViewController: UIViewController {
         
         userTableView.delegate = self
         userTableView.dataSource = self
-        //        userTableView.prefetchDataSource = self
         userTableView.allowsMultipleSelection = false
         userTableView.allowsSelection = true
-        userTableView.rowHeight = 80
         userTableView.register(nib: UserTableViewCell.self)
         let tableViewConstraints = [userTableView.topAnchor.constraint(equalTo: self.stackView.topAnchor, constant: 8),
                                     userTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
@@ -152,7 +150,7 @@ extension UserListViewController : UITableViewDataSource {
         let cell : UserTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         let model = viewModel.getUser(row: indexPath.row)
         
-        cell.noteImageView.isHidden = isNotesIconHidden(model.userId)
+        cell.noteImageView.isHidden =  isNotesIconHidden(model.id)
         cell.userNameLabel.text = model.login
         cell.userDescriptionLabel.text = model.type + "\(indexPath.row)"
         cell.userProfileImageView.downloadImage(model.avatarUrl, UIImage(named: "icon-user")) {
@@ -164,7 +162,7 @@ extension UserListViewController : UITableViewDataSource {
         return cell
     }
     
-    private func isNotesIconHidden(_ id: Int) -> Bool {
+    private func isNotesIconHidden(_ id: Int64) -> Bool {
         return UserOfflineManager.retrieveNotes(id) == nil
     }
 }

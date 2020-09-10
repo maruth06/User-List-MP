@@ -21,6 +21,10 @@ class UserPageViewModel {
     var githubLink: String { return userModel?.htmlUrl ?? "n/a" }
     var locationLink : String { return userModel?.location ?? "n/a"}
     var twitterName : String { return userModel?.twitterUsername ?? "n/a"}
+    var userNotes : String? {
+        guard let id = userModel?.id else { return nil }
+        return UserOfflineManager.retrieveNotes(id)
+    }
     
     var followingCount: NSAttributedString? {
         let paragraphStyle = NSMutableParagraphStyle()
@@ -45,6 +49,9 @@ class UserPageViewModel {
     }
     var followingLink: String? {
         return userModel?.followingUrl
+    }
+    var userId : Int64? {
+        return userModel?.id
     }
     
     init() {
@@ -96,7 +103,4 @@ class UserPageViewModel {
             }
         }
     }
-    
-    // MARK: Offline Methods
-    
 }
