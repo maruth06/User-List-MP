@@ -3,6 +3,11 @@
     <entity name="Notes" representedClassName="Notes" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="message" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="UserListModel" representedClassName="UserListModel" syncable="YES">
         <attribute name="avatarUrl" optional="YES" attributeType="String"/>
@@ -23,6 +28,11 @@
         <attribute name="subscriptionsUrl" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="UserModel" representedClassName="UserModel" syncable="YES">
         <attribute name="avatarUrl" optional="YES" attributeType="String"/>
@@ -57,10 +67,15 @@
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="updatedAt" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="UserModel" positionX="-54" positionY="-9" width="128" height="523"/>
-        <element name="UserListModel" positionX="-63" positionY="-18" width="128" height="313"/>
         <element name="Notes" positionX="-54" positionY="135" width="128" height="73"/>
+        <element name="UserListModel" positionX="-63" positionY="-18" width="128" height="313"/>
+        <element name="UserModel" positionX="-54" positionY="-9" width="128" height="523"/>
     </elements>
 </model>

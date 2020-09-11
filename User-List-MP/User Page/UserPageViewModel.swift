@@ -11,7 +11,7 @@ import UIKit
 
 class UserPageViewModel {
     
-    private var userName : String
+    public private(set) var userName : String
     private var userModel : UserModel?
     
     var imageUrl: String { return userModel?.avatarUrl ?? "" }
@@ -90,8 +90,8 @@ class UserPageViewModel {
     func requestFollowerList(_ url: String, _ completion: @escaping Completion<[User]>) {
         NetworkRequest.shared.request(type: Routes.UserPage.getFollowerList(url)) { (result) in
             switch result {
-            case .success(let userModel):
-                completion(.success(userModel))
+            case .success(let users):
+                completion(.success(users))
                 break
             case .failure(let errorResponse):
                 completion(.failure(errorResponse))
@@ -103,8 +103,8 @@ class UserPageViewModel {
     func requestFollowingList( _ completion: @escaping Completion<[User]>) {
         NetworkRequest.shared.request(type: Routes.UserPage.getFollowingList(userName)) { (result) in
             switch result {
-            case .success(let userModel):
-                completion(.success(userModel))
+            case .success(let users):
+                completion(.success(users))
                 break
             case .failure(let errorResponse):
                 completion(.failure(errorResponse))

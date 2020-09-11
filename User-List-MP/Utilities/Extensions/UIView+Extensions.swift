@@ -104,9 +104,8 @@ final class Spinner {
                              style: UIActivityIndicatorView.Style = Spinner.style,
                              backgroundColor: UIColor = Spinner.baseBackColor,
                              baseColor: UIColor = Spinner.baseColor) {
-        
         guard Spinner.activityIndicator == nil else { return }
-        DispatchQueue.main.async {
+        DispatchQueue.global().async {
             let spinner = UIActivityIndicatorView(style: style)
             spinner.backgroundColor = backgroundColor
             spinner.color = baseColor
@@ -123,7 +122,7 @@ final class Spinner {
     
     /// Stops and removes `UIActivityIndicatorView`
     public static func stop() {
-        DispatchQueue.main.async {
+        DispatchQueue.global().async {
             Spinner.activityIndicator?.stopAnimating()
             Spinner.activityIndicator?.removeFromSuperview()
             Spinner.activityIndicator = nil

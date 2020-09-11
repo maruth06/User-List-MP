@@ -15,6 +15,7 @@ class UserListViewController: UIViewController {
     private var stackView : UIStackView!
     private var messageLabel : UILabel!
     private var userTableView : UITableView!
+    private var searchBar : UISearchBar!
     
     private lazy var viewModel : UserListViewModel = {
         return UserListViewModel()
@@ -33,6 +34,7 @@ class UserListViewController: UIViewController {
         initializeViews()
         configureViews()
         configureNetworkMonitor()
+        configureSearchBar()
 //        populateListData()
     }
     
@@ -92,6 +94,14 @@ class UserListViewController: UIViewController {
         NSLayoutConstraint.activate(finalConstraints)
     }
     
+    private func configureSearchBar() {
+        self.searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44))
+        self.searchBar.placeholder = "Search User"
+        self.searchBar.returnKeyType = .done
+        self.searchBar.delegate = self
+        self.navigationItem.titleView = searchBar
+    }
+    
     private func updateUINetworkIndicator(_ isHidden: Bool) {
         DispatchQueue.main.async {
             self.networkIndicatorView.isHidden = isHidden
@@ -124,9 +134,7 @@ class UserListViewController: UIViewController {
     
     // MARK: - Data
     private func populateListData(_ isLoadMore: Bool = false) {
-        Spinner.start(from: self.view)
         viewModel.requestUsers(isLoadMore) { [weak self] (result) in
-            Spinner.stop()
             guard let self = self else { return }
             switch result {
             case .success(let users):
@@ -187,6 +195,20 @@ extension UserListViewController : UITableViewDelegate {
                 self.populateListData(true)
             }
         }
+    }
+}
+
+extension UserListViewController : UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let query = searchBar.text,
+            viewModel.performSearch(query) else { return }
+        self.viewModel.updateUserList(users: UserOfflineManager.searchUser(query))
+        self.userTableView.reloadData()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.populateListData()
     }
 }
 
