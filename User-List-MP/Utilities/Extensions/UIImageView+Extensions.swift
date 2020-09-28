@@ -12,6 +12,7 @@ extension UIImageView {
     
     func downloadImage(_ urlString: String, _ placeholder: UIImage?, _ completion: (()->Void)?) {
         let imageCache = NSCache<NSString, UIImage>()
+        self.image = placeholder
         if let cachedImage = imageCache.object(forKey: urlString as NSString) {
             self.image = cachedImage
             completion?()

@@ -29,11 +29,6 @@ class UserListViewModel : ObservableObject, Identifiable {
         pageNo = 1
         pageSize = 30
         fetchOffset = 0
-//        if let users = UserOfflineManager.retrieveUserList(self.pageSize, self.fetchOffset),
-//            users.count > 0 {
-//            self.fetchOffset += users.count
-//            self.userList.append(contentsOf: users)
-//        }
     }
     
     func fetchUsers(_ loadMore: Bool=true) {

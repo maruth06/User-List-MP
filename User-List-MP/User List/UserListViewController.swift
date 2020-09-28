@@ -33,6 +33,11 @@ class UserListViewController: UIViewController {
         configureViews()
         configureNetworkMonitor()
         configureBindings()
+        print("Fetch 1")
+        viewModel.fetchUsers()
+        print("Fetch 2")
+        viewModel.fetchUsers()
+        print("Fetch 3")
         viewModel.fetchUsers()
     }
     
@@ -53,6 +58,7 @@ class UserListViewController: UIViewController {
             return userList
         }.sink { (userList) in
             self.tableView.reloadData()
+            print("Hello")
         }.store(in: &subscriptions)
     }
     
@@ -96,12 +102,8 @@ extension UserListViewController : UITableViewDataSource {
         
         cell.noteImageView.isHidden = true // isNotesIconHidden(model.id)
         cell.userNameLabel.text = model.login
-        cell.userDescriptionLabel.text = model.type + "\(indexPath.row)"
-        cell.userProfileImageView.downloadImage(model.avatarUrl, UIImage(named: "icon-user")) {
-            let modulo = indexPath.row % 3
-            guard (modulo == 0 && indexPath.row != 0) else { return }
-            cell.userProfileImageView.invertColor()
-        }
+        cell.userDescriptionLabel.text = model.type + " \(model.id)"
+        cell.userProfileImageView.downloadImage(model.avatarUrl, UIImage(named: "icon-user"), nil)
         
         return cell
     }
@@ -125,3 +127,21 @@ extension UserListViewController : UITableViewDelegate {
         }
     }
 }
+
+// We keep track of the pending work item as a property
+//    private var pendingRequestWorkItem: DispatchWorkItem?
+//
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        // Cancel the currently pending item
+//        pendingRequestWorkItem?.cancel()
+//
+//        // Wrap our request in a work item
+//        let requestWorkItem = DispatchWorkItem { [weak self] in
+//            self?.resultsLoader.loadResults(forQuery: searchText)
+//        }
+//
+//        // Save the new work item and execute it after 250 ms
+//        pendingRequestWorkItem = requestWorkItem
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250),
+//                                      execute: requestWorkItem)
+//    }

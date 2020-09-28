@@ -33,7 +33,7 @@ class UserPageViewModel {
             string: "\(userModel?.following ?? 0)\nFollowing",
             attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 13),
                          NSAttributedString.Key.paragraphStyle : paragraphStyle])
-        return attributedString // "\(userModel?.following ?? 0)\nFollowing"
+        return attributedString
     }
     var followersCount: NSAttributedString? {
         let paragraphStyle = NSMutableParagraphStyle()
@@ -42,14 +42,17 @@ class UserPageViewModel {
             string: "\(userModel?.followers ?? 0)\nFollowers",
             attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 13),
                          NSAttributedString.Key.paragraphStyle : paragraphStyle])
-        return attributedString // "\(userModel?.followers ?? 0)\nFollowers"
+        return attributedString
     }
+    
     var followersLink: String? {
         return userModel?.followersUrl
     }
+    
     var followingLink: String? {
         return userModel?.followingUrl
     }
+    
     var userId : Int64? {
         return userModel?.id
     }
@@ -68,21 +71,20 @@ class UserPageViewModel {
     
     func requestUserDetails(completion: @escaping Completion<UserModel>) {
         NetworkRequest.shared.request(type: Routes.UserPage.getUserDetails(self.userName)) { (result) in
-                switch result {
-                case .success(let userModel):
+            switch result {
+            case .success(let userModel):
+                self.userModel = userModel
+                completion(.success(userModel))
+                break
+            case .failure(let errorResponse):
+                if let userModel = UserOfflineManager.retrieveUserDetails(self.userName) {
                     self.userModel = userModel
-                    CoreDataManager.shared.saveContext(nil)
                     completion(.success(userModel))
-                    break
-                case .failure(let errorResponse):
-                    if let userModel = UserOfflineManager.retrieveUserDetails(self.userName) {
-                        self.userModel = userModel
-                        completion(.success(userModel))
-                    } else {
-                        completion(.failure(errorResponse))
-                    }
-                    break
+                } else {
+                    completion(.failure(errorResponse))
                 }
+                break
+            }
         }
     }
     
