@@ -8,39 +8,38 @@
 
 import Foundation
 import CoreData
+import Combine
 
-class UserListViewModel {
+class UserListViewModel : ObservableObject, Identifiable {
     
-    var pageNo : Int
+    private(set) var pageNo : Int
     var pageSize : Int
-    var numberOfRows : Int {
-        return userList.count
-    }
     
-    private var userList : [UserListModel]
-    private var isFetchingInProgress : Bool = false
+    @Published private(set) var userList : [UserListModel] = []
+    @Published private(set) var errorResponse : ErrorResponse?
     private var fetchOffset : Int
+    private var loadingState : StateLoading = .finished
+    
+    enum StateLoading {
+        case loading
+        case finished
+    }
     
     init() {
-        pageNo = 0
-        userList = []
+        pageNo = 1
         pageSize = 30
         fetchOffset = 0
-        if let users = UserOfflineManager.retrieveUserList(self.pageSize, self.fetchOffset),
-            users.count > 0 {
-            self.fetchOffset += users.count
-            self.userList.append(contentsOf: users)
-            let intId = Int(self.userList.last?.id ?? 0)
-            self.pageNo = intId
-        }
+//        if let users = UserOfflineManager.retrieveUserList(self.pageSize, self.fetchOffset),
+//            users.count > 0 {
+//            self.fetchOffset += users.count
+//            self.userList.append(contentsOf: users)
+//        }
     }
     
-    func requestUsers(_ loadMore: Bool=true, completion: @escaping Completion<[UserListModel]>) {
-        guard !isFetchingInProgress else { return }
-        isFetchingInProgress = true
-        NetworkRequest.shared.request(type: Routes.UserList.getUserList(
-            pageNo, CoreDataManager.shared.persistentContainer.viewContext)) { (result) in
-                self.isFetchingInProgress = false
+    func fetchUsers(_ loadMore: Bool=true) {
+        loadingState = .loading
+        NetworkRequest.shared.request(type: Routes.UserList.getUserList(pageNo)) { (result) in
+            self.loadingState = .finished
                 switch result {
                 case .success(let userList):
                     self.pageSize = userList.count
@@ -49,26 +48,9 @@ class UserListViewModel {
                     } else {
                         self.userList = userList
                     }
-                    let intId = Int(self.userList.last?.id ?? 0)
-                    self.pageNo = loadMore ? intId : 0
-                    CoreDataManager.shared.saveContext(nil)
-                    completion(.success(userList))
+                    self.pageNo = userList.count >= self.pageSize ? (self.pageNo + 1) : self.pageNo
                     break
-                case .failure(let errorResponse):
-                    if let users = UserOfflineManager.retrieveUserList(self.pageSize, self.fetchOffset),
-                    users.count > 0 {
-                        if loadMore {
-                            self.fetchOffset += users.count
-                            self.userList.append(contentsOf: users)
-                        } else {
-                            self.fetchOffset = 0
-                            self.userList = users
-                        }
-                        let intId = Int(self.userList.last?.id ?? 0)
-                        self.pageNo = loadMore ? intId : 0
-                    } else {
-                        completion(.failure(errorResponse))
-                    }
+                case .failure(_):
                     break
                 }
         }
@@ -82,15 +64,5 @@ class UserListViewModel {
         let startIndex = userList.count - newUserList.count
         let endIndex = startIndex + newUserList.count
         return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
-    }
-    
-    func performSearch(_ query: String?) -> Bool {
-        return (query ?? "").trimmingCharacters(in: .whitespacesAndNewlines) != ""
-    }
-    
-    func updateUserList(users: [UserListModel]?) {
-        guard let users = users else { return }
-        self.userList = users
-        self.pageNo = 0
     }
 }

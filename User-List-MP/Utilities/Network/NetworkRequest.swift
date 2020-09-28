@@ -54,9 +54,9 @@ class NetworkRequest {
 
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                if let context = type.managedObjectContext {
-                    jsonDecoder.userInfo[CodingUserInfoKey.managedObjectContext!] = context
-                }
+//                if let context = type.managedObjectContext {
+//                    jsonDecoder.userInfo[CodingUserInfoKey.managedObjectContext!] = context
+//                }
                 guard let data = data else { return }
                 do {
                     let decoded = try jsonDecoder.decode(T.self, from: data)

@@ -13,23 +13,20 @@ class Routes {
     
     class UserList {
         
-        static func getUserList(_ pageNo: Int, _ managedObjectContext: NSManagedObjectContext?) -> AppEndpoint<[UserListModel]> {
+        static func getUserList(_ pageNo: Int) -> AppEndpoint<[UserListModel]> {
             return AppEndpoint(
                 resourcePath: "users?since=\(pageNo)",
                 httpMethod: .GET,
-                timeout: 20,
-                managedObjectContext: managedObjectContext)
+                timeout: 20)
         }
     }
     
     class UserPage {
         
-        static func getUserDetails(_ userName: String,
-                                   _ managedObjectContext: NSManagedObjectContext?) -> AppEndpoint<UserModel> {
+        static func getUserDetails(_ userName: String) -> AppEndpoint<UserModel> {
             return AppEndpoint.init(
                 resourcePath: "users/\(userName)",
-                httpMethod: .GET,
-                managedObjectContext: managedObjectContext)
+                httpMethod: .GET)
         }
         
         static func getFollowerList(_ url: String) -> AppEndpoint<[User]> {

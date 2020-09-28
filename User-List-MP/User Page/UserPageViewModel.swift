@@ -67,8 +67,7 @@ class UserPageViewModel {
     }
     
     func requestUserDetails(completion: @escaping Completion<UserModel>) {
-        NetworkRequest.shared.request(type: Routes.UserPage.getUserDetails(
-            self.userName, CoreDataManager.shared.persistentContainer.viewContext)) { (result) in
+        NetworkRequest.shared.request(type: Routes.UserPage.getUserDetails(self.userName)) { (result) in
                 switch result {
                 case .success(let userModel):
                     self.userModel = userModel

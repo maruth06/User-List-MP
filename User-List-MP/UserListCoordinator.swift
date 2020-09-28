@@ -27,7 +27,7 @@ class UserListCoordinator : Coordinator {
     }
     
     func start() {
-        let viewController = UserListViewController(self)
+        let viewController = UserListViewController(self, UserListViewModel())
         let navigationController = UINavigationController(rootViewController: viewController)
         window.rootViewController = navigationController
         window.makeKeyAndVisible()

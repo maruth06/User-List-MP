@@ -11,18 +11,18 @@ import CoreData
 
 class UserOfflineManager {
     
-    static func retrieveUserList(_ pageSize: Int, _ offset: Int) -> [UserListModel]? {
-        let fetchRequest = NSFetchRequest<UserListModel>(entityName: "UserListModel")
-        fetchRequest.fetchBatchSize = pageSize
-        fetchRequest.fetchOffset = offset
-        do {
-           let users = try CoreDataManager.shared.persistentContainer.viewContext.fetch(fetchRequest)
-            return users
-        } catch _ as NSError {
-            return nil
-        }
-    }
-    
+//    static func retrieveUserList(_ pageSize: Int, _ offset: Int) -> [UserListModel]? {
+//        let fetchRequest = NSFetchRequest<UserListModel>(entityName: "UserListModel")
+//        fetchRequest.fetchBatchSize = pageSize
+//        fetchRequest.fetchOffset = offset
+//        do {
+//           let users = try CoreDataManager.shared.persistentContainer.viewContext.fetch(fetchRequest)
+//            return users
+//        } catch _ as NSError {
+//            return nil
+//        }
+//    }
+//    
     static func retrieveUserDetails(_ userName: String) -> UserModel? {
         let fetchRequest = NSFetchRequest<UserModel>(entityName: "UserModel")
         fetchRequest.predicate = NSPredicate(format: "login = %@", userName)
@@ -69,14 +69,14 @@ class UserOfflineManager {
         }
     }
     
-    static func searchUser(_ query: String) -> [UserListModel]? {
-        let fetchRequest = NSFetchRequest<UserListModel>(entityName: "UserListModel")
-        fetchRequest.predicate = NSPredicate(format: "login CONTAINS[cd] %@", query)
-        do {
-           let users = try CoreDataManager.shared.persistentContainer.viewContext.fetch(fetchRequest)
-            return users.count == 0 ? nil : users
-        } catch _ as NSError {
-            return nil
-        }
-    }
+//    static func searchUser(_ query: String) -> [UserListModel]? {
+//        let fetchRequest = NSFetchRequest<UserListModel>(entityName: "UserListModel")
+//        fetchRequest.predicate = NSPredicate(format: "login CONTAINS[cd] %@", query)
+//        do {
+//           let users = try CoreDataManager.shared.persistentContainer.viewContext.fetch(fetchRequest)
+//            return users.count == 0 ? nil : users
+//        } catch _ as NSError {
+//            return nil
+//        }
+//    }
 }

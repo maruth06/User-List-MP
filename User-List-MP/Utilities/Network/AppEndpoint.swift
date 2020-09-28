@@ -16,7 +16,7 @@ struct AppEndpoint<T> {
     var httpBody: Data?
     
     var url: URL
-    var managedObjectContext: NSManagedObjectContext?
+//    var managedObjectContext: NSManagedObjectContext?
     var resourcePath : String = ""
     
     init(resourcePath: String,
@@ -27,7 +27,7 @@ struct AppEndpoint<T> {
         self.url = URL(string: "https://api.github.com/" + resourcePath)!
         self.httpMethod = httpMethod
         self.timeout = timeout
-        self.managedObjectContext = managedObjectContext
+//        self.managedObjectContext = managedObjectContext
     }
     
     init(urlString: String,
@@ -37,6 +37,6 @@ struct AppEndpoint<T> {
         self.url = URL(string: urlString)!
         self.httpMethod = httpMethod
         self.timeout = timeout
-        self.managedObjectContext = managedObjectContext
+//        self.managedObjectContext = managedObjectContext
     }
 }
