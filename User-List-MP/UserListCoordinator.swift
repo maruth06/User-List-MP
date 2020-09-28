@@ -36,7 +36,8 @@ class UserListCoordinator : Coordinator {
 
 extension UserListCoordinator : UserListCoordinatorDelegate {
     func showUserPage(_ userListViewController: UserListViewController, _ userListModel: UserListModel) {
-        let userPageViewController = UserPageViewController(self, userListModel.login)
+        let viewModel = UserPageViewModel(userListModel.login)
+        let userPageViewController = UserPageViewController(self, viewModel)
         userListViewController.navigationController?.pushViewController(userPageViewController, animated: true)
     }
 }

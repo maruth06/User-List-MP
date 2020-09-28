@@ -8,6 +8,7 @@
 
 import UIKit
 import Network
+import Combine
 
 class UserPageViewController: UIViewController {
 
@@ -25,26 +26,24 @@ class UserPageViewController: UIViewController {
     @IBOutlet private weak var saveButtonBottomConstraints: NSLayoutConstraint!
     
     private var coordinatorDelegate: UserPageCoordinatorDelegate?
-    private var viewModel : UserPageViewModel = {
-        return UserPageViewModel()
-    }()
+    private var viewModel : UserPageViewModel!
+    private var subscriptions = Set<AnyCancellable>()
     
     convenience init(_ coordinatorDelegate: UserPageCoordinatorDelegate,
-                     _ userName: String) {
+                     _ viewModel: UserPageViewModel) {
         self.init()
-        
+        self.viewModel = viewModel
         self.coordinatorDelegate = coordinatorDelegate
-        self.viewModel.setUserName(userName)
-        self.navigationItem.title = userName
+        self.navigationItem.title = viewModel.userName
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureNetworkMonitor()
-        populateData()
         setupNotificationObservers()
-        updateUI()
+        configureBindings()
+        viewModel.fetchUserDetails()
     }
     
     private func configureNetworkMonitor() {
@@ -54,7 +53,6 @@ class UserPageViewController: UIViewController {
             switch pathUpdateHandler.status {
             case .satisfied:
                 self.updateUINetworkIndicator(true)
-                self.populateData()
                 break
             default:
                 self.updateUINetworkIndicator(false)
@@ -70,24 +68,37 @@ class UserPageViewController: UIViewController {
         }
     }
     
-    private func updateUI() {
-        notesTextView.text = viewModel.userNotes
-        userNameLabel.text = viewModel.userFullName
-        userImageView.downloadImage(viewModel.imageUrl, UIImage(named: "icon-user"), nil)
-        companyLabel.text = viewModel.company
-        githubLabel.text = viewModel.githubLink
-        blogLabel.text = viewModel.blog
-        locationLabel.text = viewModel.locationLink
-        twitterLabel.text = viewModel.twitterName
-        followingButton.setAttributedTitle(viewModel.followingCount, for: .normal)
-        followersButton.setAttributedTitle(viewModel.followersCount, for: .normal)
-    }
-    
-    // MARK: - Data
-    private func populateData() {
-        viewModel.requestUserDetails { (_) in
-            Spinner.stop()
-        }
+    private func configureBindings() {
+        viewModel.$userFullName.sink { [weak self] (name) in
+            self?.userNameLabel.text = name
+        }.store(in: &subscriptions)
+        viewModel.$imageUrl.sink { [weak self] (url) in
+            self?.userImageView.downloadImage(url, UIImage(named: "icon-user"), nil)
+        }.store(in: &subscriptions)
+        viewModel.$company.sink { [weak self] (company) in
+            self?.companyLabel.text = company
+        }.store(in: &subscriptions)
+        viewModel.$githubLink.sink { [weak self] (githubLink) in
+            self?.githubLabel.text = githubLink
+        }.store(in: &subscriptions)
+        viewModel.$blog.sink { [weak self] (blog) in
+            self?.blogLabel.text = blog
+        }.store(in: &subscriptions)
+        viewModel.$locationLink.sink { [weak self] (locationLink) in
+            self?.locationLabel.text = locationLink
+        }.store(in: &subscriptions)
+        viewModel.$blog.sink { [weak self] (blog) in
+            self?.blogLabel.text = blog
+        }.store(in: &subscriptions)
+        viewModel.$twitterName.sink { [weak self] (twitterName) in
+            self?.twitterLabel.text = twitterName ?? nil
+        }.store(in: &subscriptions)
+        viewModel.$followingCount.sink { [weak self] (followingCount) in
+            self?.followingButton.setAttributedTitle(followingCount, for: .normal)
+        }.store(in: &subscriptions)
+        viewModel.$followersCount.sink { [weak self] (followersCount) in
+            self?.followersButton.setAttributedTitle(followersCount, for: .normal)
+        }.store(in: &subscriptions)
     }
     
     // MARK: - Notification Observers

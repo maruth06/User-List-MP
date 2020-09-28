@@ -150,10 +150,10 @@ class UserModel : Codable {
     var receivedEventsUrl : String
     var type : String
     var siteAdmin : Bool
-    var fullName : String
+    var fullName : String?
     var company : String?
-    var blog : String
-    var location : String
+    var blog : String?
+    var location : String?
     var email : String?
     var hireable : String?
     var bio : String?
@@ -190,10 +190,10 @@ class UserModel : Codable {
         self.receivedEventsUrl = try container.decode(String.self, forKey: .receivedEventsUrl)
         self.type = try container.decode(String.self, forKey: .type)
         self.siteAdmin = try container.decode(Bool.self, forKey: .siteAdmin)
-        self.fullName = try container.decode(String.self, forKey: .fullName)
-        self.company = try container.decode(String.self, forKey: .company)
-        self.blog = try container.decode(String.self, forKey: .blog)
-        self.location = try container.decode(String.self, forKey: .location)
+        self.fullName = try container.decodeIfPresent(String.self, forKey: .fullName)
+        self.company = try container.decodeIfPresent(String.self, forKey: .company)
+        self.blog = try container.decodeIfPresent(String.self, forKey: .blog)
+        self.location = try container.decodeIfPresent(String.self, forKey: .location)
         self.email = try container.decodeIfPresent(String.self, forKey: .email)
         self.hireable = try container.decodeIfPresent(String.self, forKey: .hireable)
         self.bio = try container.decodeIfPresent(String.self, forKey: .bio)

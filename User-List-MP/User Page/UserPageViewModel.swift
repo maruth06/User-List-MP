@@ -8,42 +8,24 @@
 
 import Foundation
 import UIKit
+import Combine
 
-class UserPageViewModel {
+class UserPageViewModel : ObservableObject, Identifiable {
     
-    public private(set) var userName : String
+    @Published private(set) var userName : String
     private var userModel : UserModel?
     
-    var imageUrl: String { return userModel?.avatarUrl ?? "" }
-    var userFullName: String { return userModel?.fullName ?? "n/a" }
-    var company : String { return userModel?.company ?? "n/a"}
-    var blog : String { return userModel?.blog ?? "n/a" }
-    var githubLink: String { return userModel?.htmlUrl ?? "n/a" }
-    var locationLink : String { return userModel?.location ?? "n/a"}
-    var twitterName : String { return userModel?.twitterUsername ?? "n/a"}
-    var userNotes : String? {
-        guard let id = userModel?.id else { return nil }
-        return "" // UserOfflineManager.retrieveNotes(id)
-    }
+    @Published private(set) var imageUrl: String
+    @Published private(set) var userFullName: String
+    @Published private(set) var company : String?
+    @Published private(set) var blog : String
+    @Published private(set) var githubLink: String
+    @Published private(set) var locationLink : String
+    @Published private(set) var twitterName : String?
+    @Published private(set) var userNotes : String
     
-    var followingCount: NSAttributedString? {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = NSTextAlignment.center
-        let attributedString = NSMutableAttributedString(
-            string: "\(userModel?.following ?? 0)\nFollowing",
-            attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 13),
-                         NSAttributedString.Key.paragraphStyle : paragraphStyle])
-        return attributedString
-    }
-    var followersCount: NSAttributedString? {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = NSTextAlignment.center
-        let attributedString = NSMutableAttributedString(
-            string: "\(userModel?.followers ?? 0)\nFollowers",
-            attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 13),
-                         NSAttributedString.Key.paragraphStyle : paragraphStyle])
-        return attributedString
-    }
+    @Published private(set) var followingCount: NSAttributedString?
+    @Published private(set) var followersCount: NSAttributedString?
     
     var followersLink: String? {
         return userModel?.followersUrl
@@ -55,33 +37,34 @@ class UserPageViewModel {
     
     var userId : Int? { return userModel?.id }
     
-    init() {
-        self.userName = ""
-//        if let userModel = UserOfflineManager.retrieveUserDetails(self.userName) {
-//            self.userModel = userModel
-//            self.userName = userModel.login
-//        }
-    }
-    
-    func setUserName(_ userName: String) {
+    init(_ userName: String) {
         self.userName = userName
+        imageUrl = "n/a"
+        userFullName = "n/a"
+        company = "n/a"
+        githubLink = "n/a"
+        locationLink = "n/a"
+        userNotes = "n/a"
+        blog = "n/a"
     }
     
-    func requestUserDetails(completion: @escaping Completion<UserModel>) {
-        NetworkRequest.shared.request(type: Routes.UserPage.getUserDetails(self.userName)) { (result) in
+    func fetchUserDetails() {
+        NetworkRequest.shared.request(type: Routes.UserPage.getUserDetails(self.userName)) { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case .success(let userModel):
                 self.userModel = userModel
-                completion(.success(userModel))
+                self.imageUrl = userModel.avatarUrl
+                self.userFullName = userModel.fullName ?? "n/a"
+                self.company = userModel.company ?? "n/a"
+                self.blog = userModel.blog ?? "n/a"
+                self.githubLink = userModel.gistsUrl
+                self.locationLink = userModel.location ?? "n/a"
+                self.twitterName = userModel.twitterUsername
+                self.followingCount = self.buttonTitle("Following", userModel.following)
+                self.followersCount = self.buttonTitle("Followers", userModel.followers)
                 break
-            case .failure(let errorResponse):
-//                if let userModel = UserOfflineManager.retrieveUserDetails(self.userName) {
-//                    self.userModel = userModel
-//                    completion(.success(userModel))
-//                } else {
-                    completion(.failure(errorResponse))
-//                }
-                break
+            case .failure(_): break
             }
         }
     }
@@ -110,5 +93,15 @@ class UserPageViewModel {
                 break
             }
         }
+    }
+    
+    private func buttonTitle(_ title: String, _ count: Int) -> NSAttributedString? {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = NSTextAlignment.center
+        let attributedString = NSMutableAttributedString(
+            string: "\(count)\n\(title)",
+            attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 13),
+                         NSAttributedString.Key.paragraphStyle : paragraphStyle])
+        return attributedString
     }
 }
