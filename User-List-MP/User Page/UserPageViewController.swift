@@ -53,12 +53,10 @@ class UserPageViewController: UIViewController {
         monitor.pathUpdateHandler = { pathUpdateHandler in
             switch pathUpdateHandler.status {
             case .satisfied:
-                print("Internet connection is on.")
                 self.updateUINetworkIndicator(true)
                 self.populateData()
                 break
             default:
-                print("There's no internet connection.")
                 self.updateUINetworkIndicator(false)
                 break
             }
@@ -154,11 +152,11 @@ class UserPageViewController: UIViewController {
     }
     
     @IBAction func onTappedSaveButton(_ sender: Any) {
-        guard let userId = viewModel.userId else { return }
-        UserOfflineManager.saveNotes(userId, notesTextView.text) { (error) in
-            if let error = error {
-                self.showAlertDialog("Error", error.localizedDescription, buttonTitle: "OK")
-            }
-        }
+//        guard let userId = viewModel.userId else { return }
+//        UserOfflineManager.saveNotes(userId, notesTextView.text) { (error) in
+//            if let error = error {
+//                self.showAlertDialog("Error", error.localizedDescription, buttonTitle: "OK")
+//            }
+//        }
     }
 }

@@ -35,10 +35,10 @@ class UserListViewController: UIViewController {
         configureBindings()
         print("Fetch 1")
         viewModel.fetchUsers()
-        print("Fetch 2")
-        viewModel.fetchUsers()
-        print("Fetch 3")
-        viewModel.fetchUsers()
+//        print("Fetch 2")
+//        viewModel.fetchUsers()
+//        print("Fetch 3")
+//        viewModel.fetchUsers()
     }
     
     // MARK: - UI Methods

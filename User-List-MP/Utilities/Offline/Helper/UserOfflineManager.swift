@@ -23,16 +23,16 @@ class UserOfflineManager {
 //        }
 //    }
 //    
-    static func retrieveUserDetails(_ userName: String) -> UserModel? {
-        let fetchRequest = NSFetchRequest<UserModel>(entityName: "UserModel")
-        fetchRequest.predicate = NSPredicate(format: "login = %@", userName)
-        do {
-           let users = try CoreDataManager.shared.persistentContainer.viewContext.fetch(fetchRequest)
-            return users.first
-        } catch _ as NSError {
-            return nil
-        }
-    }
+//    static func retrieveUserDetails(_ userName: String) -> UserModel? {
+//        let fetchRequest = NSFetchRequest<UserModel>(entityName: "UserModel")
+//        fetchRequest.predicate = NSPredicate(format: "login = %@", userName)
+//        do {
+//           let users = try CoreDataManager.shared.persistentContainer.viewContext.fetch(fetchRequest)
+//            return users.first
+//        } catch _ as NSError {
+//            return nil
+//        }
+//    }
     
     static func saveNotes(_ id: Int64, _ message: String, completion: ((_ error: NSError?)->Void)?) {
         guard let entity = NSEntityDescription.entity(

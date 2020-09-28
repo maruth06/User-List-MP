@@ -17,8 +17,8 @@ extension UIImageView {
             self.image = cachedImage
             completion?()
         } else {
+            print(urlString)
             guard let url = URL(string: urlString) else {
-                print("Invalid URL")
                 self.image = placeholder
                 completion?()
                 return

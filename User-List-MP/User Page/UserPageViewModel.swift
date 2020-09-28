@@ -23,7 +23,7 @@ class UserPageViewModel {
     var twitterName : String { return userModel?.twitterUsername ?? "n/a"}
     var userNotes : String? {
         guard let id = userModel?.id else { return nil }
-        return UserOfflineManager.retrieveNotes(id)
+        return "" // UserOfflineManager.retrieveNotes(id)
     }
     
     var followingCount: NSAttributedString? {
@@ -53,16 +53,14 @@ class UserPageViewModel {
         return userModel?.followingUrl
     }
     
-    var userId : Int64? {
-        return userModel?.id
-    }
+    var userId : Int? { return userModel?.id }
     
     init() {
         self.userName = ""
-        if let userModel = UserOfflineManager.retrieveUserDetails(self.userName) {
-            self.userModel = userModel
-            self.userName = userModel.login
-        }
+//        if let userModel = UserOfflineManager.retrieveUserDetails(self.userName) {
+//            self.userModel = userModel
+//            self.userName = userModel.login
+//        }
     }
     
     func setUserName(_ userName: String) {
@@ -77,12 +75,12 @@ class UserPageViewModel {
                 completion(.success(userModel))
                 break
             case .failure(let errorResponse):
-                if let userModel = UserOfflineManager.retrieveUserDetails(self.userName) {
-                    self.userModel = userModel
-                    completion(.success(userModel))
-                } else {
+//                if let userModel = UserOfflineManager.retrieveUserDetails(self.userName) {
+//                    self.userModel = userModel
+//                    completion(.success(userModel))
+//                } else {
                     completion(.failure(errorResponse))
-                }
+//                }
                 break
             }
         }
